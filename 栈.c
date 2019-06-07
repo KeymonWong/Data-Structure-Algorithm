@@ -56,3 +56,29 @@ pop(sqStack *s, ElemType *e)
   // top指向位置的下一个元素出栈
   *e = *--(s->top);
 }
+
+/** 清空栈 就是将栈中的元素全部作废，但栈本身的物理空间并不发生改变(不是销毁) */
+clearStack(sqStack *s)
+{
+  s->top = s->base;
+}
+
+/** 销毁栈 释放掉该栈占据的物理空间 */
+destroyStack(sqStack *s)
+{
+  int i, len;
+  len = s->stackSize;
+  for (int i = 0; i < len; i++)
+  {
+    free(s->base);
+    s->base++;
+  }
+  s->base = s->top = NULL;
+  s->stackSize = 0;
+}
+
+/** 获取栈当前容量，和栈的最大容量不一样，栈的最大容量是指该栈占据的内存空间的大小，其值为s.stackSize */
+int stackLen(sqStack s)
+{
+  return s.top - s.base; // 指针之间是不能相加的，你可以说 指针++ 指针--；指针之间是可以相减的。另 top 和 base 的类型要一致，不然相减会出错
+}
