@@ -13,7 +13,7 @@ typedef struct
 }sqStack;
 
 /** 创建一个栈 */
-initStack(sqStack *s)
+void initStack(sqStack *s)
 {
   s->base = (ElemType *)malloc(STACK_INIT_SIZE * sizeof(ElemType));
   if (!s->base)
@@ -27,7 +27,7 @@ initStack(sqStack *s)
 
 /** 入栈 */
 #define STACK_INCREMENT 10
-push(sqStack *s, ElemType e)
+void push(sqStack *s, ElemType e)
 {
   // 如果栈满，追加空间
   if (s->top - s->base >= s->stackSize)
@@ -47,7 +47,7 @@ push(sqStack *s, ElemType e)
 }
 
 /** 出栈 */
-pop(sqStack *s, ElemType *e)
+void pop(sqStack *s, ElemType *e)
 {
   if (s->top == s->base) // 栈空
   {
@@ -58,13 +58,13 @@ pop(sqStack *s, ElemType *e)
 }
 
 /** 清空栈 就是将栈中的元素全部作废，但栈本身的物理空间并不发生改变(不是销毁) */
-clearStack(sqStack *s)
+void clearStack(sqStack *s)
 {
   s->top = s->base;
 }
 
 /** 销毁栈 释放掉该栈占据的物理空间 */
-destroyStack(sqStack *s)
+void destroyStack(sqStack *s)
 {
   int i, len;
   len = s->stackSize;
@@ -81,4 +81,9 @@ destroyStack(sqStack *s)
 int stackLen(sqStack s)
 {
   return s.top - s.base; // 指针之间是不能相加的，你可以说 指针++ 指针--；指针之间是可以相减的。另 top 和 base 的类型要一致，不然相减会出错
+}
+
+int main(int argc, char const *argv[])
+{
+  return 0;
 }
