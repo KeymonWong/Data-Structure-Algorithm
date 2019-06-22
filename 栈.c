@@ -5,12 +5,11 @@
 typedef int ElemType;
 
 /** 栈的顺序存储结构 */
-typedef struct
-{
+typedef struct {
   ElemType *base; ///< 指向栈底的指针变量
   ElemType *top; ///< 指向栈顶的指针变量
   int stackSize; ///< 栈当前可使用的最大容量
-}sqStack;
+} sqStack;
 
 /** 创建一个栈 */
 void initStack(sqStack *s)
