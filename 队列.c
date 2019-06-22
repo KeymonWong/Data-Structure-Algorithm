@@ -101,18 +101,41 @@ typedef struct
 /**
  * @brief 初始化一个循环队列
  */
-void InitQueue(cycleQueue, *q)
+void InitCycleQueue(cycleQueue, *q)
 {
   q->base = (ElemType *)malloc(MAX_SIZE * sizeof(ElemType));
   if (!q->base)
   {
     exit(0);
   }
-  q->front = q->next = 0;
+  q->front = q->rear = 0;
 }
 
+/**
+ * @brief 入循环队列
+ */
+void InsertCycleQueue(cycleQueue *q, ElemType e)
+{
+  if ((q->rear + 1) % MAX_SIZE == q->front)
+  {
+    return; // 队列已经满了
+  }
+   q->base[q->rear] = e;
+   q->rear = (q->rear + 1) % MAX_SIZE;
+}
 
-
+/**
+ * @brief 出循环队列
+ */
+void DeleteCycleQueue(cycleQueue *q, ElemType *e)
+{
+  if (q->front == q->rear)
+  {
+    return; // 队列为空
+  }
+  *e = q->base[q->front];
+  q->front = (q->front + 1) % MAX_SIZE;
+}
 
 /*************** --- 队列的顺序存储结构 end --- *******************/
 
