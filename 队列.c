@@ -105,7 +105,7 @@ typedef struct
 /**
  * @brief 初始化一个循环队列
  */
-void InitCycleQueue(cycleQueue, *q)
+void InitCycleQueue(cycleQueue *q)
 {
   q->base = (ElemType *)malloc(MAX_SIZE * sizeof(ElemType));
   if (!q->base)
