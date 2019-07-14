@@ -42,6 +42,10 @@ void move(int n, char x, char y, char z)
 
 /** 八皇后 */
 
+void eightQueen() {
+    
+}
+
 int main(int argc, char const *argv[])
 {
     int res;
