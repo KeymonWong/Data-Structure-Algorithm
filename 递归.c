@@ -80,9 +80,9 @@ void EightQueen(int rowIndex, int n, int (*chess)[8])
     int i; //行
     int j; //列
 
-    for (int i = 0; i < 8; i++)
+    for (i = 0; i < 8; i++)
     {
-        for (int j = 0; j < 8; j++)
+        for (j = 0; j < 8; j++)
         {
             tempChess[i][j] = chess[i][j];
         }
@@ -90,21 +90,21 @@ void EightQueen(int rowIndex, int n, int (*chess)[8])
     
     if (rowIndex == 8)
     {
-        printf("第 %d 种", (count + 1));
-        for (int i = 0; i < 8; i++)
+        printf("第 %d 种：\n", (count + 1));
+        for (i = 0; i < 8; i++)
         {
-            for (int j = 0; j < 8; j++)
+            for (j = 0; j < 8; j++)
             {
                 printf("%d ", *(*(tempChess + i) + j));
-                printf("\n");
-            }
+            }               
+            printf("\n");
         }
         printf("\n");
         count++;
     } 
     else
     {
-        for (int j = 0; j < n; j++)
+        for (j = 0; j < n; j++)
         {
             if (IsNotDanger(rowIndex, j, chess))
             {
@@ -125,8 +125,67 @@ void EightQueen(int rowIndex, int n, int (*chess)[8])
 
 int IsNotDanger(int rowIndex, int columnIndex, int (*chess)[8])
 {
+    // flag 为 1 代表有危险，0 代表无危险
+    int flag1 = 0, flag2 = 0, flag3 = 0, flag4 = 0, flag5 = 0;
 
-    return 1;
+    // 判断列的方向，即当前列的每一行
+    for (int i = 0; i < 8; i++)
+    {
+        if (*(*(chess + i) + columnIndex) != 0)  
+        {
+            flag1 = 1;
+            break;
+        }
+    }
+
+    // 判断左上方
+    for (int i = rowIndex, j = columnIndex; i >= 0 && j >= 0; i--, j--)
+    {
+        if (*(*(chess + i) + j) != 0)
+        {
+            flag2 = 1;
+            break;
+        }
+    }
+    
+    // 判断右下方
+    for (int i = rowIndex, j = columnIndex; i < 8 && j < 8; i++, j++)
+    {
+        if (*(*(chess + i) + j) != 0)
+        {
+            flag3 = 1;
+            break;
+        }
+    }
+
+    // 判断右上方
+    for (int i = rowIndex, j = columnIndex; i >= 0 && j < 8; i--, j++)
+    {
+        if (*(*(chess + i) + j) != 0)
+        {
+            flag4 = 1;
+            break;
+        }
+    }
+    
+    // 判断左下方
+    for (int i = rowIndex, j = columnIndex; i < 8 && j >= 0; i++, j--)
+    {
+        if (*(*(chess + i) + j) != 0)
+        {
+            flag5 = 1;
+            break;
+        }
+    }
+
+    if (flag1 || flag2 || flag3 || flag4 || flag5)
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
 }
 
 int main(int argc, char const *argv[])
@@ -142,6 +201,18 @@ int main(int argc, char const *argv[])
     move(n, 'X', 'Y', 'Z');
 
     // print();
+    printf("\n\n"); 
+
+    int chess[8][8], row, column;
+    for (row = 0; row < 8; row++)
+    {
+        for (column = 0; column < 8; column++)
+        {
+            chess[row][column] = 0;
+        }
+    }
+    EightQueen(0, 8, chess);
+    printf("总共有 %d 种解决方法!\n\n", count);
     
     return 0;
 }
