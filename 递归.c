@@ -23,7 +23,7 @@ void print()
         printf("%c", a);
     }
 }
-
+ 
 /** 汉诺塔 */
 // 将 n 个盘子从 x 借助 y 移动到 z
 void move(int n, char x, char y, char z)
