@@ -16,4 +16,6 @@ typedef struct
     PTNode nodes[MAX_TREE_SIZE];
     int root; //根的位置
     int count; //结点数目
-}
+} PTree;
+
+//
