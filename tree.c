@@ -45,3 +45,11 @@ typedef struct
     int r; //根的位置
     int n; //结点数目
 } PCTree;
+
+
+//二叉树的链式存储结构：二叉链表
+typedef struct BiTNode
+{
+    ElemType data; //数据域
+    struct BiTNode *lchild, *rchild; //指针域，左右两个孩子
+}BiTNode, *BiTree;
