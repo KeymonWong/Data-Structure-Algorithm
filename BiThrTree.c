@@ -20,3 +20,23 @@ typedef struct BiThrTNode
     struct BiThrTNode *lchild, *rchild;
     PointerTag ltag, rtag;
 } BiThrTNode, *BiThrTree;
+
+//创建一个二叉树，约定用户遵循前序遍历的方式输入数据
+void CreateBiThrTree(BiThrTree *T)
+{
+    char c;
+    scanf("%c", &c);
+    if (c == ' ') {
+        *T = NULL;
+    } else {
+        *T = (BiThrTNode *)malloc(sizeof(BiThrTNode));
+        (*T)->data = c;
+        (*T)->ltag = Link;
+        (*T)->rtag = Link;
+
+        CreateBiThrTree(&(*T)->lchild);
+        CreateBiThrTree(&(*T)->rchild);
+    }
+    
+    
+}
