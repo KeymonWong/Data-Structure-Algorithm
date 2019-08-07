@@ -21,6 +21,9 @@ typedef struct BiThrTNode
     PointerTag ltag, rtag;
 } BiThrTNode, *BiThrTree;
 
+//全局变量
+BiThrTree pre;
+
 //创建一个二叉树，约定用户遵循前序遍历的方式输入数据
 void CreateBiThrTree(BiThrTree *T)
 {
@@ -37,6 +40,25 @@ void CreateBiThrTree(BiThrTree *T)
         CreateBiThrTree(&(*T)->lchild);
         CreateBiThrTree(&(*T)->rchild);
     }
-    
+}
+
+//中序遍历线索化
+void InThreading(BiThrTree T)
+{
+    if (T) {
+        InThreading(T->lchild); //递归左孩子线索化
+
+        if (!T->lchild) { //该结点没有左孩子，设置 ltag 为 Thread，并把 lchild 指向刚刚访问过的结点
+            T->ltag = Thread;
+            T->lchild = pre;
+        }
+        if (!pre->rchild) {
+            pre->rtag = Thread;
+            pre->rchild = T;
+        }
+        pre = T;
+
+        InThreading(T->rchild); //递归右孩子线索化
+    }
     
 }
