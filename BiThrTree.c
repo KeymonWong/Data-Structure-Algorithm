@@ -60,5 +60,31 @@ void InThreading(BiThrTree T)
 
         InThreading(T->rchild); //递归右孩子线索化
     }
+}
+
+void InOrderThreading(BiThrTree *p, BiThrTree T)
+{
+    *p = (BiThrTree)malloc(sizeof(BiThrTNode));
+    (*p)->ltag = Link;
+    (*p)->rtag = Thread;
+    (*p)->rchild = *p;
+    if (!T) {
+        (*p)->lchild = *p;
+    } else {
+        (*p)->lchild = T;
+        pre = *p;
+        InThreading(T);
+        pre->rchild = *p;
+        pre->rtag = Thread;
+        (*p)->rchild = pre;
+    }
+}
+
+int main(int argc, char const *argv[])
+{
+    BiThrTree P, T = NULL;
+    CreateBiThrTree(&T);
+    InOrderThreading(&P, T);
     
+    return 0;
 }
