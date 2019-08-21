@@ -52,4 +52,4 @@ typedef struct BiTNode
 {
     ElemType data; //数据域
     struct BiTNode *lchild, *rchild; //指针域，左右两个孩子
-}BiTNode, *BiTree;
+} BiTNode, *BiTree;
