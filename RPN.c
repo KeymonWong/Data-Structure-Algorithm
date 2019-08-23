@@ -13,7 +13,7 @@ typedef struct
     ElemType *base;
     ElemType *top;
     int stackSize;
-}sqStack;
+} sqStack;
 
 void InitStack(sqStack *s)
 {

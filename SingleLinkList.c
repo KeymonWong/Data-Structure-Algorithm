@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+typedef int ElemType;
+
 /**
  * @brief 线性表的并集
  * 
@@ -218,7 +220,7 @@ Status LinkList_delete(LinkList *L, int i, ElemType *e) {
 
     p = *L;
 
-    while(p->next && j<i){
+    while(p->next && j<i) {
         p = p->next;
         ++j;
     }
